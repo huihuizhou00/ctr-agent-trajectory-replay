@@ -1,0 +1,9 @@
+{
+  "config": {"ad_load": 0.35, "frequency_cap": 8.0, "refresh_interval": 55.0},
+  "experiments": [
+    {"experiment_id": 1, "timestamp_hour": 1.0, "config_before": {"ad_load": 0.35, "frequency_cap": 8, "refresh_interval": 55}, "config_after": {"ad_load": 0.35, "frequency_cap": 8.0, "refresh_interval": 55.0}, "rollout_start_hour": 1.0, "rollout_complete_hour": 1.25}
+  ],
+  "eval_period_attempts": [],
+  "total_blackout_hours": 0.25,
+  "experiment_count": 1
+}
