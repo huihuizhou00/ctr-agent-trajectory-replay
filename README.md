@@ -1,6 +1,6 @@
 # CTR Agent Evaluation: Trajectory Replay and Verifier Audit
 
-这是一个面向 Agent 评测工程岗位的 CTR/Harbor 项目展示仓库。核心产出不是“调出一个高分参数”，而是把一次 Agent benchmark 作业拆成可复核的评测链路：任务规格 → 环境与 Harness → Agent trajectory → artifact → 独立 verifier → reward，并进一步分析 verifier 测到了什么、没有测到什么，以及失败应该归因到模型、任务、Harness 还是基础设施。
+这是一个围绕 CTR/Harbor benchmark 的 Agent 评测工程项目。核心产出不是“调出一个高分参数”，而是把一次 Agent 作业拆成可复核的评测链路：任务规格 → 环境与 Harness → Agent trajectory → artifact → 独立 verifier → reward，并进一步分析 verifier 测到了什么、没有测到什么，以及失败应该归因到模型、任务、Harness 还是基础设施。
 
 ## 项目背景
 
@@ -14,7 +14,7 @@ CTR Task 要求 Agent 在 48 小时模拟活动中联合设置：
 
 因此，这不是单纯的参数搜索，而是污染观测、参数交互、实验成本和冻结窗口约束下的受限系统辨识与联合优化问题。
 
-## 我的负责范围
+## 项目工作内容
 
 ### 1. 项目与环境准备
 
@@ -46,7 +46,7 @@ CTR Task 要求 Agent 在 48 小时模拟活动中联合设置：
 - 用 `processless_pass` 证明：没有 experiments 过程记录，只要最终 snapshot 满足三项 outcome，原 verifier 仍然会通过；这揭示了 intended construct 与 effective construct 的差距。
 - 编写独立过程 Verifier 原型，检查早期/晚期污染观察、sleeper 覆盖、过滤应用、基线与联合实验、参数变化和 hour 42 前锁定，并用正反 fixture 验证边界。
 
-### 5. 可视化与对外说明
+### 5. 可视化与汇报
 
 - 构建离线 trajectory replay 页面，展示 8 条轨迹、1,597 个原始 step、Agent message、tool call、shell/Python keystrokes、terminal observation、metrics 和环境状态量。
 - 设计模型、环境、动作三条对齐时间轨道，支持逐 step 拖动、过滤、搜索、状态量 carry-forward 标记和双语切换。
@@ -86,8 +86,6 @@ CTR Task 要求 Agent 在 48 小时模拟活动中联合设置：
 - `probe/`：原 outcome verifier 的最小 Probe 和实际输出。
 - `process-verifier-revision/`：过程 gate 原型、fixture 和实际输出。
 
-公开仓库只发布我的评测分析、验证代码、报告和展示页面，不包含原始 task、完整 benchmark trajectory、Harbor 源码或 Harbor Job 运行目录。完整项目快照保存在对应的私有归档仓库。
-
 ## 运行页面与检查
 
 在仓库根目录执行：
@@ -117,4 +115,3 @@ Codex/大模型用于资料检索、代码阅读、轨迹整理、页面实现�
 ## 证据边界
 
 页面展示可观察证据，不展示或推断隐藏思维链。Agent 自述、raw CTR、dwell-time、proxy、Oracle reward 和 verifier reward 均不能互相替代；缺少 evaluator 产物时不强行把结果写成 reward `0`，而是标记为 `infra/unscorable`。原始输入和历史运行产物保持只读。
-
